@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Yusein2001/magic-movie-may-2025#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3"
   }
 }
