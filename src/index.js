@@ -4,6 +4,9 @@ import handlebars from 'express-handlebars' ;
 // Create express Server
 const app = express();
 
+// Add static folder
+app.use(express.static('./src/public'));
+
 //Add view engine
 app.engine('hbs', handlebars.engine({extname: 'hbs'}));
 // Set default engine
@@ -14,7 +17,7 @@ app.set('views', './src/views');
 
 // Rautes config
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {layout: false});
 });
 
 //Start express server
