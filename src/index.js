@@ -6,8 +6,10 @@ const app = express();
 
 //Add view engine
 app.engine('hbs', handlebars.engine({extname: 'hbs'}));
-// Ser default engine
+// Set default engine
 app.set('view engine', 'hbs');
+// Set default view folder
+app.set('views', './src/views');
 
 
 // Rautes config
