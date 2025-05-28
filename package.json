@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Yusein2001/magic-movie-may-2025/issues"
   },
-  "homepage": "https://github.com/Yusein2001/magic-movie-may-2025#readme"
+  "homepage": "https://github.com/Yusein2001/magic-movie-may-2025#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
