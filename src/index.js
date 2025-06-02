@@ -2,6 +2,7 @@ import express from 'express' ;
 import handlebars from 'express-handlebars' ;
 
 import homeController from './controllers/homeController.js';
+import movieController from './controllers/movieController.js';
 
 // Create express Server
 const app = express();
@@ -19,6 +20,7 @@ app.set('views', './src/views');
 
 // Rautes config
 app.use(homeController);
+app.use('/movies', movieController);
 
 
 //Start express server
