@@ -17,4 +17,9 @@ export const movieServices = {
         return parsedData;
     },
 
+    async add (data) {
+        const json = JSON.stringify(data, null, 2)
+        await fs.writeFile(movieDataDir, json);   
+    },
+
 }
