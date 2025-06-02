@@ -16,7 +16,8 @@ app.set('views', './src/views');
 
 
 // Rautes config
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+
     res.render('home');
 });
 

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "36415846",
+    "title": "Jungle Cruise",
+    "genre": "Adventure",
+    "description": "Dreaming about saving countless lives and having another adventure.",
+    "imgUrl": "https://lumiere-a.akamaihd.net/v1/images/p_junglecruise_21740_v2_bb7f0ae4.jpeg",
+    "director": "Jaume Collet-Serra",
+    "year": "2021",
+    "rating": "6.6",
+    "category": "movie"
+  },
+  {
+    "id": "642398523684",
+    "title": "Man of Steel",
+    "genre": "Superhero",
+    "description": "An alien child is evacuated from his dying world and send to Earth to live among humans.",
+    "imgUrl": "https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_QL75_UY281_CR0,0,190,281_.jpg",
+    "director": "Zack Snyder",
+    "year": "2013",
+    "rating": "7.1",
+    "category": "movie"
+  },
+  {
+    "id": "778945221111335",
+    "title": "Avengers:Endgame",
+    "genre": "Superhero",
+    "description": "After the devastating events of Avengers: Infinity War (218), the universe in in ruins.",
+    "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaw6QTsDE3d6-qOL5xMa4-JDdBNTa3uspCrg&s",
+    "director": "A. Russo",
+    "year": "2021",
+    "rating": "5.7",
+    "category": "movie"
+  }
+]
