@@ -1,6 +1,8 @@
 import express from 'express' ;
 import handlebars from 'express-handlebars' ;
 
+import homeController from './controllers/homeController.js';
+
 // Create express Server
 const app = express();
 
@@ -16,14 +18,7 @@ app.set('views', './src/views');
 
 
 // Rautes config
-app.get('/', async (req, res) => {
-
-    res.render('home');
-});
-
-app.get('/about', (req, res) => {
-    res.render('about');
-});
+app.use(homeController);
 
 
 //Start express server
