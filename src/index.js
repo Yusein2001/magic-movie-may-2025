@@ -25,7 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 // Rautes config
 app.use(homeController);
 app.use('/movies', movieController);
-
+app.all('/*url', (req, res) => {
+    res.render('404', { pageTitle: "Not Found", imgSrc: "/img/logo.webp" });
+});
 
 //Start express server
 app.listen(5000, () => console.log('Server listening on http://localhost:5000 ... '))
