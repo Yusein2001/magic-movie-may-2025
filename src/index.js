@@ -20,8 +20,6 @@ app.use(express.static('./src/public'));
 // Url encoding middlware
 app.use(express.urlencoded({ extended: false }));
 
-
-
 // Rautes config
 app.use(homeController);
 app.use('/movies', movieController);

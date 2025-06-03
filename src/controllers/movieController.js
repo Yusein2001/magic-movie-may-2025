@@ -23,8 +23,10 @@ movieController.get('/:id/details', async (req, res) => {
     const id = req.params.id ;
 
     const currMovie = await movieServices.getSpecific(id);
+    
+    let rating = '★'.repeat(Number(currMovie.rating)) ;
 
-    res.render('details', {pageTitle: "Detail Page", imgSrc: "/img/logo.webp", currMovie});
+    res.render('details', {pageTitle: "Detail Page", imgSrc: "/img/logo.webp", currMovie, rating });
 });
 
 movieController.get('/search', async (req, res) => {
