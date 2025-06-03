@@ -19,8 +19,12 @@ movieController.post('/addMovie', async (req, res) => {
     res.redirect('/');
 })
 
-movieController.get('/:id/details', (req, res) => {
-    res.render('details');
+movieController.get('/:id/details', async (req, res) => {
+    const id = req.params.id ;
+
+    const currMovie = await movieServices.getSpecific(id);
+
+    res.render('details', {pageTitle: "Detail Page", imgSrc: "/img/logo.webp", currMovie});
 })
 
 
