@@ -17,9 +17,7 @@ homeController.get('/create', (req, res) => {
     res.render('createMovie', { pageTitle: "Create Page", imgSrc: "https://cdn.pixabay.com/photo/2013/07/13/13/36/film-161204_1280.png" });
 });
 
-homeController.get('/search', (req, res) => {
-    res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", })
-})
+
 
 
 

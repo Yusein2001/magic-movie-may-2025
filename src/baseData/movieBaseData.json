@@ -31,16 +31,5 @@
     "year": "2021",
     "rating": "5.7",
     "category": "movie"
-  },
-  {
-    "title": "Cat",
-    "category": "animation",
-    "genre": "asddas",
-    "director": "asdas",
-    "year": "2025",
-    "imgUrl": "https://media.istockphoto.com/id/467163117/photo/cat-lays-on-a-footpath-in-the-woods.jpg?s=612x612&w=0&k=20&c=Oqxr43fORl7Fj7aI2WWUUiPXkC5xNdag8000z79p8fY=",
-    "rating": "6",
-    "description": "asdasdasdasdasdasdasasasasd",
-    "id": 1748937476537
   }
 ]

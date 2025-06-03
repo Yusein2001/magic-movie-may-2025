@@ -27,6 +27,10 @@ movieController.get('/:id/details', async (req, res) => {
     res.render('details', {pageTitle: "Detail Page", imgSrc: "/img/logo.webp", currMovie});
 });
 
+movieController.get('/search', async (req, res) => {
+    const allMovie = await movieServices.getAll();
+    res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: allMovie })
+})
 
 
 
