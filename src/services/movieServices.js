@@ -31,4 +31,31 @@ export const movieServices = {
         
     },
 
+    async search (searchParams = {}) {
+
+        if(searchParams.title == '' && searchParams.genre == '' && searchParams.year == ''){
+            return [];
+        }
+
+        const rowData = await fs.readFile(movieDataDir, 'utf-8') ;
+        const parsedData = JSON.parse(rowData);
+        
+        let result = parsedData
+
+        if(searchParams.title){
+            result = result.filter( obj => obj.title.toLowerCase().includes(searchParams.title.toLowerCase()));
+        }
+
+        if(searchParams.genre){
+            result = result.filter( obj => obj.genre.toLowerCase().includes(searchParams.genre.toLowerCase()));
+        }
+
+        if(searchParams.year){
+            result = result.filter( obj => obj.year == searchParams.year);
+        }
+        
+        return result;
+        
+    }
+
 }

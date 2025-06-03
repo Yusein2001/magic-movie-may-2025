@@ -28,8 +28,20 @@ movieController.get('/:id/details', async (req, res) => {
 });
 
 movieController.get('/search', async (req, res) => {
-    const allMovie = await movieServices.getAll();
-    res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: allMovie })
+    const query = req.query;
+    const length = Object.keys(query).length;
+
+    if(length){
+        const result = await movieServices.search(query);
+        res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: result });
+        
+    }else{
+        const allMovie = await movieServices.getAll();
+        res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: allMovie });
+    }
+    
+
+    
 })
 
 
