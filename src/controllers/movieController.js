@@ -35,11 +35,11 @@ movieController.get('/search', async (req, res) => {
 
     if(length){
         const result = await movieServices.search(query);
-        res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: result });
+        res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: result, query });
         
     }else{
         const allMovie = await movieServices.getAll();
-        res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: allMovie });
+        res.render('search', { pageTitle: "Search Page", imgSrc: "/img/logo.webp", movies: allMovie, query });
     }
     
 
