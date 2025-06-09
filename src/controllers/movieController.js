@@ -8,13 +8,7 @@ movieController.post('/addMovie', async (req, res) => {
 
     const urlData = req.body ;
 
-    const id = Date.now();
-    urlData.id = id;
-
-    const movieBaseData = await movieServices.getAll();
-    movieBaseData.push(urlData);
-
-    await movieServices.add(movieBaseData);
+    await movieServices.add(urlData);
 
     res.redirect('/');
 });

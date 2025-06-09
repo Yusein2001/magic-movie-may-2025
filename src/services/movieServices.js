@@ -1,58 +1,57 @@
 import fs from 'fs/promises';
+import mongoose from 'mongoose';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import Movie from '../baseDataModels/Movie.js';
+
 const currFilePath = fileURLToPath(import.meta.url);
 const currFileDir = path.dirname(currFilePath);
 
-const movieDataDir = path.join(currFileDir, '../baseData/movieBaseData.json');
+const movieDataDir = path.join(currFileDir, '../baseDataModels/movieBaseData.json');
 
 export const movieServices = {
     
     async getAll () {
-        const rowData = await fs.readFile(movieDataDir, 'utf-8');
-        const parsedData = JSON.parse(rowData);
+        // const rowData = await fs.readFile(movieDataDir, 'utf-8');
+        // const parsedData = JSON.parse(rowData);
+        const rowData = await Movie.find();
+        const result = rowData.map(doc => doc.toObject());
         
-        return parsedData;
+        return result;
     },
 
     async add (data) {
-        const json = JSON.stringify(data, null, 2)
-        await fs.writeFile(movieDataDir, json);   
+        // const json = JSON.stringify(data, null, 2)
+        // await fs.writeFile(movieDataDir, json);  
+        await Movie.create(data); 
     },
 
     async getSpecific (id) {
-        const rowData = await fs.readFile(movieDataDir, 'utf-8') ;
-        const parsedData = JSON.parse(rowData);
 
-        const result = parsedData.find(obj => obj.id == id);
+        const specificMovie = await Movie.findById(id);
+        const result = specificMovie.toObject();
+
         return result ;
         
     },
 
-    async search (searchParams = {}) {
+    async search (rawParams = {}) {
 
-        if(searchParams.title == '' && searchParams.genre == '' && searchParams.year == ''){
-            return [];
+        const searchParams = {} ;
+
+        if(rawParams.title?.trim()){
+            searchParams.title = rawParams.title.trim();
+        }
+        if(rawParams.genre?.trim()){
+            searchParams.genre = rawParams.genre.trim();
+        }
+        if(rawParams.year?.trim()){
+            searchParams.year = Number(rawParams.year.trim());
         }
 
-        const rowData = await fs.readFile(movieDataDir, 'utf-8') ;
-        const parsedData = JSON.parse(rowData);
-        
-        let result = parsedData
-
-        if(searchParams.title){
-            result = result.filter( obj => obj.title.toLowerCase().includes(searchParams.title.toLowerCase()));
-        }
-
-        if(searchParams.genre){
-            result = result.filter( obj => obj.genre.toLowerCase().includes(searchParams.genre.toLowerCase()));
-        }
-
-        if(searchParams.year){
-            result = result.filter( obj => obj.year == searchParams.year);
-        }
+        const result = await Movie.find(searchParams).lean();
         
         return result;
         
