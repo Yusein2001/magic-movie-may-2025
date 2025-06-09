@@ -1,5 +1,6 @@
 import express from 'express' ;
 import handlebars from 'express-handlebars' ;
+import mongoose, { startSession } from 'mongoose';
 
 import homeController from './controllers/homeController.js';
 import movieController from './controllers/movieController.js';
@@ -14,6 +15,13 @@ app.set('view engine', 'hbs');
 // Set default view folder
 app.set('views', './src/views');
 
+//Add mongoose 
+try{
+    await mongoose.connect('mongodb://localhost:27017', {dbName: "magic-movies"});
+    console.log('Connected to Mongoose');
+}catch(err){
+    console.log(`MongooseErr: ${err.message}`);
+}
 
 // Add static folder
 app.use(express.static('./src/public'));
