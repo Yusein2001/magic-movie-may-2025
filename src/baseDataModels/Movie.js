@@ -27,7 +27,8 @@ const movieSchema = new mongoose.Schema({
     imgUrl: {
         type: String,
         required: [true,'ImgUrl is required !'],
-        validate: /^https?:\/\//
+        validate: [/^https?:\/\//, 'Invalid URL !']
+
         },
     rating: {
         type: Number,
