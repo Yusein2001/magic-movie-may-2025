@@ -1,4 +1,3 @@
-import fs from 'fs/promises';
 import mongoose from 'mongoose';
 
 import path from 'path';
@@ -9,13 +8,9 @@ import Movie from '../baseDataModels/Movie.js';
 const currFilePath = fileURLToPath(import.meta.url);
 const currFileDir = path.dirname(currFilePath);
 
-const movieDataDir = path.join(currFileDir, '../baseDataModels/movieBaseData.json');
-
 export const movieServices = {
     
     async getAll () {
-        // const rowData = await fs.readFile(movieDataDir, 'utf-8');
-        // const parsedData = JSON.parse(rowData);
         const rowData = await Movie.find();
         const result = rowData.map(doc => doc.toObject());
         
@@ -23,8 +18,6 @@ export const movieServices = {
     },
 
     async add (data) {
-        // const json = JSON.stringify(data, null, 2)
-        // await fs.writeFile(movieDataDir, json);  
         await Movie.create(data); 
     },
 
