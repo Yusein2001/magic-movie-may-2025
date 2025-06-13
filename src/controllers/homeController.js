@@ -1,5 +1,6 @@
 import express from 'express';
 import { movieServices } from '../services/movieServices.js';
+import { castServices } from '../services/castServices.js';
 
 const homeController = express.Router();
 
@@ -19,6 +20,14 @@ homeController.get('/create', (req, res) => {
 
 homeController.get('/create/cast', (req, res) => {
     res.render('createCast', { pageTitle: "Create Cast Page", imgSrc: "https://cdn.pixabay.com/photo/2013/07/13/13/36/film-161204_1280.png" });
+});
+
+homeController.post('/create/cast', async (req, res) => {
+    const castData = req.body;
+    
+    await castServices.save(castData);
+    res.redirect('/');
+    
 });
 
 
