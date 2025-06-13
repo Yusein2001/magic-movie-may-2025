@@ -18,7 +18,7 @@ movieController.get('/:id/details', async (req, res) => {
 
     const currMovie = await movieServices.getSpecific(id);
     
-    let rating = '★'.repeat(Number(currMovie.rating)) ;
+    let rating = '★'.repeat(Number(currMovie.rating)) ;   
 
     res.render('details', {pageTitle: "Detail Page", imgSrc: "/img/logo.webp", currMovie, rating });
 });
