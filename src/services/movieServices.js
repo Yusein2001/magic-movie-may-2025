@@ -23,10 +23,10 @@ export const movieServices = {
 
     async getSpecific (id) {
 
-        const specificMovie = await Movie.findById(id);
-        const result = specificMovie.toObject();
+        const specificMovie = await Movie.findById(id).populate('casts');
+        // const result = specificMovie.toObject();
 
-        return result ;
+        return specificMovie ;
         
     },
 
@@ -48,6 +48,12 @@ export const movieServices = {
         
         return result;
         
+    },
+
+    async attach (movieId, castId){
+        const movie = await this.getSpecific(movieId);
+        movie.casts.push(castId);
+        movie.save();
     }
 
 }

@@ -41,6 +41,10 @@ const movieSchema = new mongoose.Schema({
         required: [true,'Description is required !'],
         maxLength: [100, 'Description is ']
     },
+    casts: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Cast'
+    }]
 
 });
 

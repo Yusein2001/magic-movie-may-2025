@@ -6,6 +6,7 @@ const homeController = express.Router();
 
 homeController.get('/', async (req, res) => {
     const movieArr = await movieServices.getAll();
+    
     res.render('home', { movieArr, pageTitle: "Catalog Page", imgSrc: "/img/logo.webp" });
 });
 

@@ -2,8 +2,14 @@ import Cast from "../baseDataModels/Cast.js";
 
 
 export const castServices = {
-     save (data) {
+    save (data) {
         const newCast = Cast(data);
         return newCast.save();
+    },
+
+    getAll () {
+        return Cast.find().lean();
     }
-}
+
+
+};

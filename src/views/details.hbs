@@ -26,10 +26,29 @@
 
             </div>
         </div>
+
         <div class="card_right">
             <img src="{{currMovie.imgUrl}}"
                 alt="image">
         </div>
+
     </div>
+
+        <div class="main-cast-card">
+            {{#each currMovie.casts}}
+                    <div class="cast-card">
+                        <div class="card-img">
+                            <img src="{{this.castImg}}"
+                                alt="cast">
+                        </div>
+                        <div class="cast-info">
+                            <h1>{{this.name}}</h1>
+                            <h3>Age: {{this.age}}</h3>
+                            <h3>Born: {{this.born}}</h3>
+                        </div>
+                    </div>
+            {{/each}}
+                  
+        </div>
 
 </section>
