@@ -5,6 +5,8 @@ import mongoose, { startSession } from 'mongoose';
 import homeController from './controllers/homeController.js';
 import movieController from './controllers/movieController.js';
 
+//{ pageTitle: "About Page", imgSrc: "/img/logo.webp" }
+
 // Create express Server
 const app = express();
 

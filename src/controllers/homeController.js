@@ -31,6 +31,9 @@ homeController.post('/create/cast', async (req, res) => {
     
 });
 
+homeController.get('/login', (req, res) => {
+    res.render('login', { pageTitle: "Login Page", imgSrc: "/img/logo.webp" });
+})
 
 
 
