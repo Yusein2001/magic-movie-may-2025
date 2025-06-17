@@ -73,8 +73,20 @@ movieController.get('/:id/edit', async (req, res) => {
 
     const options = categoryOptionSelector(movie.category);
     
-    //edit the 'edit.hbs' file
     res.render('edit', {pageTitle: "Edit Page", imgSrc: "/img/logo.webp", movie, options})
+})
+
+movieController.post('/:id/edit', async (req, res) => {
+    //Check the creator id and curr id 
+
+    const id = req.params.id;
+
+    const updateData = req.body ;
+
+    await movieServices.update(id, updateData);
+
+    res.redirect(`/movies/${id}/details`);
+
 })
 
 export default movieController ;

@@ -54,6 +54,10 @@ export const movieServices = {
         const movie = await this.getSpecific(movieId);
         movie.casts.push(castId);
         movie.save();
+    },
+
+    async update (movieID, data){
+        await Movie.findByIdAndUpdate(movieID, data);
     }
 
 }
