@@ -1,6 +1,7 @@
 import express from 'express';
 import { movieServices } from '../services/movieServices.js';
 import { castServices } from '../services/castServices.js';
+import { categoryOptionSelector } from '../utils/category-optionSelector.js';
 
 
 const movieController = express.Router();
@@ -63,5 +64,17 @@ movieController.post('/attach/cast/:id', async (req, res) => {
 
 });
 
+movieController.get('/:id/edit', async (req, res) => {
+
+    const id = req.params.id ;
+
+    let movie = await movieServices.getSpecific(id);
+    movie = movie.toObject();
+
+    const options = categoryOptionSelector(movie.category);
+    
+    //edit the 'edit.hbs' file
+    res.render('edit', {pageTitle: "Edit Page", imgSrc: "/img/logo.webp", movie, options})
+})
 
 export default movieController ;
