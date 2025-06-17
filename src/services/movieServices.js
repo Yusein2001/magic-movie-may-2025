@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
+import Movie from '../baseDataModels/Movie.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import Movie from '../baseDataModels/Movie.js';
 
 const currFilePath = fileURLToPath(import.meta.url);
 const currFileDir = path.dirname(currFilePath);
