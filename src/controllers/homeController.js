@@ -1,6 +1,8 @@
 import express from 'express';
 import { movieServices } from '../services/movieServices.js';
 import { castServices } from '../services/castServices.js';
+import User from '../baseDataModels/User.js';
+import bcrypt from 'bcrypt';
 
 const homeController = express.Router();
 
@@ -39,6 +41,41 @@ homeController.get('/register', (req, res) => {
     res.render('register', { pageTitle: "Register Page", imgSrc: "/img/logo.webp" });
 });
 
+homeController.post('/register', async (req, res) => {
+
+    const userData = req.body;
+
+    if(userData.email === '' || userData.password === '' || userData.rePassword === ''){
+        return res.send(`
+            <script>
+                alert("There are empty fields!");
+                window.location.href = "/register";
+            </script>
+        `);
+    }
+
+    if(userData.password !== userData.rePassword){
+        return res.send(`
+            <script>
+                alert("The passwords didn't match !");
+                window.location.href = "/register";
+            </script>
+        `);
+    }
+
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    
+    const newUser = new User({email: userData.email, password: hashedPassword})
+    await newUser.save();
+    
+    res.send(`
+            <script>
+                alert("You have registered successfully !");
+                window.location.href = "/login";
+            </script>
+        `);
+
+});
 
 
 export default homeController ;
