@@ -7,10 +7,9 @@ import User from '../baseDataModels/User.js';
 
 import { movieServices } from '../services/movieServices.js';
 import { castServices } from '../services/castServices.js';
-import User from '../baseDataModels/User.js';
-import bcrypt from 'bcrypt';
 import { userServices } from '../services/userServices.js';
 import { getSecretKey } from '../utils/jsonwebtokenSecretKey.js';
+import { userChecking } from '../middlewares/checkUser.js';
 
 
 const homeController = express.Router();
@@ -26,11 +25,11 @@ homeController.get('/about', (req, res) => {
     res.render('about', { pageTitle: "About Page", imgSrc: "/img/logo.webp" });
 });
 
-homeController.get('/create', (req, res) => {
+homeController.get('/create', userChecking, (req, res) => {
     res.render('createMovie', { pageTitle: "Create Page", imgSrc: "https://cdn.pixabay.com/photo/2013/07/13/13/36/film-161204_1280.png" });
 });
 
-homeController.get('/create/cast', (req, res) => {
+homeController.get('/create/cast', userChecking, (req, res) => {
     res.render('createCast', { pageTitle: "Create Cast Page", imgSrc: "https://cdn.pixabay.com/photo/2013/07/13/13/36/film-161204_1280.png" });
 });
 
