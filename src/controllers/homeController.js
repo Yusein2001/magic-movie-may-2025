@@ -1,8 +1,17 @@
 import express from 'express';
+import bcrypt from 'bcrypt';
+import jsonwebtoken from 'jsonwebtoken' ;
+import cookieParser from 'cookie-parser' ;
+
+import User from '../baseDataModels/User.js';
+
 import { movieServices } from '../services/movieServices.js';
 import { castServices } from '../services/castServices.js';
 import User from '../baseDataModels/User.js';
 import bcrypt from 'bcrypt';
+import { userServices } from '../services/userServices.js';
+import { getSecretKey } from '../utils/jsonwebtokenSecretKey.js';
+
 
 const homeController = express.Router();
 
@@ -35,6 +44,58 @@ homeController.post('/create/cast', async (req, res) => {
 
 homeController.get('/login', (req, res) => {
     res.render('login', { pageTitle: "Login Page", imgSrc: "/img/logo.webp" });
+});
+
+homeController.post('/login', async (req, res) => {
+
+    const {email, password} = req.body;
+    
+    
+    if(email === '' || password === ''){
+        return res.send(`
+            <script>
+            alert("There are empty fields!");
+            window.location.href = "/login";
+            </script>
+            `);
+        };
+        
+    const userDoc = await userServices.getOne(email);
+    const user = userDoc?.toObject();
+    
+    if(!user){
+        return res.send(`
+            <script>
+                alert("The user doesn't exist!");
+                window.location.href = "/login";
+            </script>
+        `);
+    };
+
+    const verifyPassword = await bcrypt.compare(password, user.password);
+
+    if(verifyPassword){
+
+        const secretKey = getSecretKey();
+        const token = jsonwebtoken.sign(user, secretKey);
+
+        res.cookie('accessToken', token);
+        req.cookies
+        return res.send(`
+            <script>
+                alert("You successfully logged in !");
+                window.location.href = "/login";
+            </script>
+        `);
+    }else{
+        return res.send(`
+            <script>
+                alert(" Wrong password !");
+                window.location.href = "/login";
+            </script>
+        `);
+    }
+
 });
 
 homeController.get('/register', (req, res) => {
