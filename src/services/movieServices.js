@@ -58,6 +58,10 @@ export const movieServices = {
 
     async update (movieID, data){
         await Movie.findByIdAndUpdate(movieID, data);
+    },
+
+    delete (id){
+        return Movie.findByIdAndDelete(id);
     }
 
 }
