@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser' ;
 
 import homeController from './controllers/homeController.js';
 import movieController from './controllers/movieController.js';
-import { isLogged } from './middlewares/isLogged.js';
+import { saveUserInfo } from './middlewares/saveUserInfo.js';
 
 //{ pageTitle: "About Page", imgSrc: "/img/logo.webp" }
 
@@ -34,7 +34,7 @@ app.use(cookieParser());
 // Url encoding middlware
 app.use(express.urlencoded({ extended: false }));
 
-app.use(isLogged);
+app.use(saveUserInfo);
 
 // Rautes config
 app.use(homeController);
