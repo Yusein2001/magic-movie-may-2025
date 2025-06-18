@@ -4,6 +4,7 @@ import mongoose, { startSession } from 'mongoose';
 
 import homeController from './controllers/homeController.js';
 import movieController from './controllers/movieController.js';
+import { isLogged } from './middlewares/isLogged.js';
 
 //{ pageTitle: "About Page", imgSrc: "/img/logo.webp" }
 
@@ -29,6 +30,8 @@ try{
 app.use(express.static('./src/public'));
 // Url encoding middlware
 app.use(express.urlencoded({ extended: false }));
+
+app.use(isLogged);
 
 // Rautes config
 app.use(homeController);
