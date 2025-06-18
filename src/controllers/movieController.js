@@ -1,7 +1,10 @@
 import express from 'express';
+
 import { movieServices } from '../services/movieServices.js';
 import { castServices } from '../services/castServices.js';
 import { categoryOptionSelector } from '../utils/category-optionSelector.js';
+import { userChecking } from '../middlewares/checkUser.js';
+import { isAuthor } from '../middlewares/isAuthor.js';
 
 
 const movieController = express.Router();
@@ -9,6 +12,8 @@ const movieController = express.Router();
 movieController.post('/addMovie', async (req, res) => {
 
     const urlData = req.body ;
+    const currUserData = res.locals.user;
+    urlData.creatorId = currUserData.id;
 
     await movieServices.add(urlData);
 
@@ -17,13 +22,16 @@ movieController.post('/addMovie', async (req, res) => {
 
 movieController.get('/:id/details', async (req, res) => {
     const id = req.params.id ;
+    const loggedUserData = res.locals.user;
 
     let currMovie = await movieServices.getSpecific(id);
     currMovie = currMovie.toObject();
 
+    const isCreator = currMovie.creatorId === loggedUserData.id ;
+
     let rating = '★'.repeat(Number(currMovie.rating)) ;   
 
-    res.render('details', {pageTitle: "Detail Page", imgSrc: "/img/logo.webp", currMovie, rating });
+    res.render('details', {pageTitle: "Detail Page", imgSrc: "/img/logo.webp", currMovie, rating, isCreator });
 });
 
 movieController.get('/search', async (req, res) => {
@@ -43,7 +51,7 @@ movieController.get('/search', async (req, res) => {
     
 });
 
-movieController.get('/attach/cast/:id', async (req, res) => {
+movieController.get('/attach/cast/:id', userChecking, isAuthor, async (req, res) => {
     const id = req.params.id;
 
     let currMovie = await movieServices.getSpecific(id);
@@ -64,7 +72,7 @@ movieController.post('/attach/cast/:id', async (req, res) => {
 
 });
 
-movieController.get('/:id/edit', async (req, res) => {
+movieController.get('/:id/edit', userChecking, isAuthor, async (req, res) => {
 
     const id = req.params.id ;
 
@@ -87,6 +95,12 @@ movieController.post('/:id/edit', async (req, res) => {
 
     res.redirect(`/movies/${id}/details`);
 
+})
+
+movieController.get('/:id/delete', userChecking, isAuthor, async (req, res) => {
+    const id = req.params.id;
+    await movieServices.delete(id);
+    res.redirect('/');
 })
 
 export default movieController ;
