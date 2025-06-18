@@ -137,5 +137,9 @@ homeController.post('/register', async (req, res) => {
 
 });
 
+homeController.get('/logout', userChecking, (req, res) => {
+    res.clearCookie('accessToken');
+    res.redirect('/');
+})
 
 export default homeController ;
