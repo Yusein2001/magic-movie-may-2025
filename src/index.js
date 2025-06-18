@@ -1,6 +1,7 @@
 import express from 'express' ;
 import handlebars from 'express-handlebars' ;
 import mongoose, { startSession } from 'mongoose';
+import cookieParser from 'cookie-parser' ;
 
 import homeController from './controllers/homeController.js';
 import movieController from './controllers/movieController.js';
@@ -28,6 +29,8 @@ try{
 
 // Add static folder
 app.use(express.static('./src/public'));
+//cookie parser
+app.use(cookieParser());
 // Url encoding middlware
 app.use(express.urlencoded({ extended: false }));
 
