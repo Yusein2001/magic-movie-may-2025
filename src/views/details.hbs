@@ -24,11 +24,13 @@
 
 
             </div>
+            {{#if isCreator}}
             <div class="details-btn">
                 <a href="/movies/attach/cast/{{currMovie._id}}" class="details" >Add Cast</a>
                 <a href="/movies/{{currMovie._id}}/edit" class="details">Edit</a>
                 <a href="/movies/{{currMovie._id}}/delete" class="details">Delete</a>
             </div>
+            {{/if}}
         </div>
 
         <div class="card_right">
