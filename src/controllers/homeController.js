@@ -83,7 +83,7 @@ homeController.post('/login', async (req, res) => {
         return res.send(`
             <script>
                 alert("You successfully logged in !");
-                window.location.href = "/login";
+                window.location.href = "/";
             </script>
         `);
     }else{
