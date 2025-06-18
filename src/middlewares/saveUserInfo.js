@@ -4,7 +4,7 @@ import jsonwebtoken from 'jsonwebtoken' ;
 import { getSecretKey } from '../utils/jsonwebtokenSecretKey.js';
 
 
-export function isLogged(req, res, next) {
+export function saveUserInfo(req, res, next) {
     const accessToken = req.cookies['accessToken'];
 
     const secretKey = getSecretKey();
